@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>❤️ For You</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+
+body{
+background:#1a000d;
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+/* ===== Floating ===== */
+.heart,.star{
+position:fixed;
+bottom:-20px;
+opacity:.7;
+animation:floatUp linear forwards;
+pointer-events:none;
+}
+.heart{color:#ff4d88}
+.star{color:#fff}
+
+@keyframes floatUp{
+0%{transform:translateY(0);opacity:0}
+20%{opacity:1}
+100%{transform:translateY(-120vh);opacity:0}
+}
+
+/* ===== Password ===== */
+#passScreen{
+position:fixed;inset:0;
+background:#2a0015;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
+
+.box{
+background:rgba(255,192,203,.2);
+padding:15px;
+margin:15px;
+border-radius:15px;
+backdrop-filter:blur(10px);
+}
+
+/* ===== Inputs ===== */
+input{
+padding:10px;
+border:none;
+border-radius:10px;
+text-align:center;
+}
+
+button{
+background:#ff4d88;
+border:none;
+color:white;
+padding:10px;
+border-radius:10px;
+margin-top:10px;
+cursor:pointer;
+}
+
+/* ===== Main ===== */
+#main{display:none;animation:fade 2s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+/* ===== Typewriter ===== */
+#type{min-height:120px;line-height:2}
+
+/* ===== Slider ===== */
+.slider img{
+width:100%;
+height:250px;
+object-fit:cover;
+border-radius:15px;
+}
+
+/* ===== Cards ===== */
+.cards{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.card{
+background:#ffffff22;
+padding:20px;
+border-radius:15px;
+cursor:pointer;
+transition:.6s;
+}
+
+/* ===== Counter ===== */
+.counter{
+display:grid;
+gap:10px;
+}
+
+.time{
+background:#ff4d8844;
+padding:15px;
+border-radius:15px;
+font-size:18px;
+}
+
+/* ===== Result ===== */
+.result{margin-top:10px;padding:10px;border-radius:10px}
+
+</style>
+</head>
+
+<body>
+
+<!-- Password -->
+<div id="passScreen">
+<div class="box">
+<h2>🔐 ادخلي الباسورد</h2>
+<input id="pass">
+<br>
+<button onclick="enter()">دخول ❤️</button>
+</div>
+</div>
+
+<!-- Main -->
+<div id="main">
+
+<audio id="music" loop>
+<source src="music.mp3">
+</audio>
+
+<!-- Typewriter -->
+<div class="box" id="type"></div>
+
+<!-- Slider -->
+<div class="box slider">
+<img id="slide" src="img1.jpg">
+<p id="cap">إنتي أحلى حاجة في حياتي ❤️</p>
+</div>
+
+<!-- Cards -->
+<div class="box cards">
+<div class="card" onclick="flip(this,'حبيت')">هنااااا 😂🙋🏻‍♂</div>
+<div class="card" onclick="flip(this,'ومش بحب')">كارت 2</div>
+<div class="card" onclick="flip(this,'ولا هحب')">كارت 3</div>
+<div class="card" onclick="flip(this,'حد قدك')">كارت 4</div>
+</div>
+
+<!-- Love Box -->
+<div class="box">
+أنا بحبك اوي ❤️<br>
+مش هسيبك مهما حصل ❤️<br>
+إنتي أماني ❤️<br>
+وجودك فرق معايا ❤️<br>
+أنا ليكي طول العمر ❤️<br>
+هفضل جنبك ❤️<br>
+وعد مني ❤️<br>
+بحبك بجد ❤️
+</div>
+
+<!-- Counter -->
+<div class="box counter" id="counter"></div>
+
+<!-- Memories -->
+<div class="box" onclick="memToggle()">📖 صفحة الذكريات</div>
+<div id="mem" class="box" style="display:none">
+🎂 10/2/2015<br>
+💕 29/4/2025
+</div>
+
+<!-- Question -->
+<div class="box">
+<p>Do you love me?</p>
+<button onclick="ans('y')">Yes</button>
+<button onclick="ans('n')">No</button>
+<div id="res"></div>
+</div>
+
+<!-- Secret -->
+<div class="box" onclick="showSecret()">💌 كلمة سر</div>
+<div id="secret" class="box" style="display:none">
+بحبك اوي ❤️<br>
+إنتي كل حاجة ❤️<br>
+مش هسيبك ❤️<br>
+أنا ليكي ❤️<br>
+بحلم بيكي ❤️<br>
+إنتي الأمان ❤️<br>
+أنا بحبك ❤️<br>
+وهفضل أحبك ❤️
+</div>
+
+<!-- Final -->
+<div class="box">
+وعد مني إني أفضل جنبك مهما حصل ❤️
+</div>
+
+<!-- Bottom Cards -->
+<div class="box cards">
+<div class="card" onclick="this.innerHTML='بحبك ❤️'">كارت</div>
+<div class="card" onclick="this.innerHTML='بعشقك ❤️'">كارت</div>
+<div class="card" onclick="this.innerHTML='بموت فيكي ❤️'">كارت</div>
+<div class="card" onclick="this.innerHTML='إنتي حياتي ❤️'">كارت</div>
+</div>
+
+</div>
+
+<script>
+
+/* دخول */
+function enter(){
+if(pass.value==="لف"){
+passScreen.style.display="none";
+main.style.display="block";
+
+let m=music;
+m.play();
+m.volume=0;
+
+let fade=setInterval(()=>{
+if(m.volume<1)m.volume+=0.05
+else clearInterval(fade)
+},300);
+
+type();
+}
+}
+
+/* كتابة */
+function type(){
+let text=`بحبك اوي ❤️
+إنتي أحلى حاجة حصلتلي ❤️
+مش قادر أعيش من غيرك ❤️
+كل يوم بحبك أكتر ❤️
+إنتي الدنيا كلها ❤️
+وجودك نعمة ❤️`;
+
+let i=0;
+let el=document.getElementById("type");
+
+function run(){
+if(i<text.length){
+el.innerHTML+=text[i++];
+setTimeout(run,40);
+}
+}
+run();
+}
+
+/* Slider */
+let imgs=["img1.jpg","img2.jpg","img3.jpg","img4.jpg"];
+let caps=[
+"إنتي قمر 😂❤️",
+"جمالك مش طبيعي 😍",
+"ضحكتك بتخطف القلب ❤️",
+"أحلى حد في الدنيا ❤️"
+];
+
+let x=0;
+setInterval(()=>{
+x=(x+1)%imgs.length;
+slide.src=imgs[x];
+cap.innerText=caps[x];
+},3000);
+
+/* Cards */
+function flip(el,text){
+el.innerHTML=text;
+}
+
+/* Counter */
+let target=new Date("2025-04-29T06:27:30");
+
+setInterval(()=>{
+let now=new Date();
+let diff=target-now;
+
+let d=Math.floor(diff/(1000*60*60*24));
+let h=Math.floor((diff/(1000*60*60))%24);
+let m=Math.floor((diff/(1000*60))%60);
+let s=Math.floor((diff/1000)%60);
+
+counter.innerHTML=`
+<div class="time">${d} يوم ❤️</div>
+<div class="time">${h} ساعة ❤️</div>
+<div class="time">${m} دقيقة ❤️</div>
+<div class="time">${s} ثانية ❤️</div>
+`;
+},1000);
+
+/* Hearts & Stars */
+setInterval(()=>{
+let e=document.createElement("div");
+e.className=Math.random()>0.5?"heart":"star";
+e.innerHTML=e.className=="heart"?"❤️":"✨";
+e.style.left=Math.random()*100+"vw";
+e.style.animationDuration=(8+Math.random()*10)+"s";
+document.body.appendChild(e);
+setTimeout(()=>e.remove(),15000);
+},700);
+
+/* Memory */
+function memToggle(){
+mem.style.display=mem.style.display=="none"?"block":"none";
+}
+
+/* Answer */
+function ans(a){
+if(a=="y"){
+res.innerHTML="بحبك يا هبلة 🤭♥";
+res.style.background="pink";
+}else{
+res.innerHTML="اخص عليك 😡";
+res.style.background="red";
+}
+}
+
+/* Secret */
+function showSecret(){
+secret.style.display="block";
+}
+
+</script>
+
+</body>
+  </html>
